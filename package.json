@@ -1,0 +1,29 @@
+{
+	"name": "localex",
+	"version": "0.0.0",
+	"description": "Rough site template",
+	"author": {
+		"name": "Graham Baskett",
+		"email": "gbaskett@gmail.com"
+	},
+	"website":{
+		"url": "tbd"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/gbask/localex.git"
+	},
+	"private": true,
+	"dependencies": {
+		"express": "3.0.6",
+		"stylus": "0.31.0",
+		"jade": "0.27.7",
+		"mongodb": "2.4.5",
+		"moment" : "1.7.2",
+		"emailjs": "0.3.3"
+	},
+	"engines": {
+		"node": "0.8.14",
+		"npm":  "1.1.65"
+	}
+}

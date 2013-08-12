@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Local Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-combined.no-icons.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+    <link rel="stylesheet" href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fsocial-buttons.css">
+    <script src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fjquery.js"></script>
+    <script src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800" rel="stylesheet" type="text/css">
+    <style type="text/css">
+
+      /* Large Desktop */
+      @media (min-width: 980px) {
+        body {
+          padding-top: 60px;
+        }
+       .linediv-l {
+         border-right: 1px white solid;
+        }
+       .linediv-r {
+         border-left: 1px white solid;
+        }
+      }
+      
+      /* Landscape phones and down */
+      @media (max-width: 480px) {
+       .copy {
+        padding: 2.5% 10%;
+       }
+       .linediv-l {
+        border-bottom: 1px white solid;
+       }
+       .linediv-r {
+        border-top: 1px white solid;
+       }
+      }
+ 
+      /* All form factors */
+      
+      /* Main body and headings */
+      body{
+        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      }
+      .heading, .subheading {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        text-align: center;
+      }
+      p.lead {
+        padding-top: 1.5%;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      /* Video pitch and Action */
+      .pitch {
+        padding: 2.5% 0%;
+      }
+      .order {
+        padding: 2% 0%;
+      }
+      .actions {
+        background-color: #343434;
+        padding: 3% 0%;
+      }
+      .video, .thermometer, .order, .social, .statistics {
+        text-align: center;
+      }
+      .statistics h3, .statistics p {
+        color: white;
+      }
+
+      /* Marketing Copy and Footer */
+      .copy {
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        text-align: justify;
+      }
+      .asset {
+        padding: 2.5% 0%;
+      }
+      .footer {
+        color: #cccccc;
+        text-align: center;
+      }
+      .footer p {
+        font-sizze: 11px;
+      }
+      .footer a {
+        color: #ccccff;
+      }
+    </style>
+  </head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <!-- Mobile-firendly navbar adapted from example. -->
+  <!-- http://twitter.github.io/bootstrap/examples/starter-template.html -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+	<button type="button" class="btn btn-navbar"
+		data-toggle="collapse" data-target=".nav-collapse">
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	</button>
+	<a class="brand" href="#">LocalEx</a>
+	<div class="nav-collapse collapse">
+	  <ul class="nav">
+	    <li class="active"><a href="#home">Home</a></li>
+	    <li><a href="#about">About</a></li>
+	    <li><a href="/contact">Contact</a></li>
+
+	  </ul>
+	  <ul class="nav pull-right">
+		<a href="/login" class="btn btn-primary">	
+			Sign Up
+		</a>
+	  </ul>
+
+	
+	</div>
+
+      </div><!--/.nav-collapse -->
+
+    </div>
+  </div>
+				    
+  <!-- We use row-fluid inside containers to achieve a resizable layout. -->
+  <!-- blogs.endjin.com/2013/04/tips-for-implementing-responsive-designs-using-bootstrap/ -->
+  <!-- http://stackoverflow.com/a/12270322 -->
+   <div class="container" id="home">
+     <!-- Fong and paired font of .heading/.subheading and body from Google Fonts -->
+     <!-- www.google.com/fonts/specimen/Ubuntu -->
+     <!-- www.googole.com/fonts/speciment/Ubuntu#pairings -->
+      <div class="row-fluid heading">
+	<div class="span12">
+	  <h1>Local Experience</h1>
+	</div>
+      </div>
+      <div class="row-fluid subheading">
+	<div class="span12">
+	  <!-- Special typography from Bootstrap for lead paragraph. -->
+	  <!-- http://twitter.github.io/bootstrap/base-css.html#typography -->
+	  <p class="lead">Meet a local with your interests and experience the best places in their city.</p>
+	</div>
+      </div>
+      <div class="row-fluid pitch">
+	<div class="span5 offset1 video">
+	  <img class="img-polaroid" src="http://c69282.r82.cf3.rackcdn.com/IMG_4303.jpg">
+	</div>
+	
+	<!-- We define a new 'actions' div to contain stats, order, and share buttons. -->
+	<div class="span5 actions">
+	  <div class="span8 offset2">
+	    <div class="statistics">
+	      <div class="span4">
+		<!-- linediv-l and linediv-r give dividing lines that look different in horizontal and vertical layouts, illustrating media queries. -->
+		<div class="linediv-l">
+		  <h3>10</h3> <p>backers</p>
+		</div>
+	      </div>
+	      <div class="span4">
+		 <div class="linediv-c">
+		  <h3>$500</h3> <p>of $5,000</p>
+		</div> 
+	      </div>
+	      <div class="span4">
+		<div class="linediv-r">
+		  <h3>10</h3> <p>days left</p>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="span10 offset1">
+	    <!-- Bootstrap progress bar -->
+	    <!-- http://twitter.github.io/bootstrap/components.html#progress -->
+	    <div class="thermometer progress active">
+	      <div class="bar bar-success" style="width: 10%;"></div>
+	      <div class="bar bar-warning" style="width: 90%;"></div>
+	    </div>
+	  </div>
+	  <div class="span6 offset3 order">
+	    <!--Standard bootstrap button. -->
+	    <!-- http://twitter.github.io/bootstrap/base-css.html#buttons -->
+	    <!-- <button class="btn btn-success btn-large">Preorder Experiences</button> -->
+		<a href="#myModal" role="button" class="btn btn-success btn-large" data-toggle="modal">Preorder Experiences</a>
+		
+		<div id="myModal" class="modal high fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3 id="myModalLabel">Preorder</h3>
+			</div>
+			<div class="modal-body">
+				<div class="row-fluid">
+					<div class="span6">
+						<p>Enter an amount from the dropdown menu to preorder credit for future use.</p>
+					</div>
+					<div class="span6">
+						<div class="input-prepend">
+							<span class="add-on">$</span>
+							<input class="span12" id="prependedInput" type="text" placeholder="Enter Amount">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</butotn>
+				<button class="btn btn-primary">Place Order</button>
+			</div>
+		</div>
+	  </div>
+	  <div class="span8 offset2 social">
+	    <!-- Social buttons are not included in default bootstrap. -->
+	    <!-- See: http://noizwaves.github.io/bootstrap-social-buttons -->
+	    <button class="btn btn-twitter"><i class="icon-twitter"></i> | Twitter</button>
+	    <button class="btn btn-facebook"><i class="icon-facebook"></i> | Facebook</button>
+	  </div>
+	</div>
+      </div>
+
+      <div class="row-fluid section1" id="about">
+	<div class="span5 offset1 asset">
+	  <img class="img-polaroid" src="http://c69282.r82.cf3.rackcdn.com/Pr_25_-_TRS_-_23_04_10_0748.jpg">
+	</div>
+	<div class="span5 copy">
+	  <p>
+	    Local Experience is a platform for connecting you with locals in a new city who can
+		show you their favorite places and share a bit of their culture.  Avoid tourist traps
+		as a traveler, find new places in your home town, and make new friends.
+	  </p>
+	</div>
+      </div>
+
+      <div class="row-fluid section2">
+	<div class="span5 offset1 copy copy-right">
+	  <p>
+	    As a local with knowledge of your home town, make extra cash by taking spending time
+		with travelers at your favorite restaurant, coffe shop, bar, or hike and make new friends
+		along the way.  Set up a small profile with details about your interestes and a brief description
+		of where you like to go and what you like to do.
+	  </p>
+	</div>
+	<div class="span5 asset">
+	  <img class="img-polaroid" src="http://placehold.it/480x300">
+	</div>
+      </div>
+
+      <!-- http://twitter.github.io/bootstrap/javascript.html#collapse -->
+      <div class="row-fluid faq">
+	<div class="span10 offset1">
+	  <h3>FAQ</h3>
+	  <div class="accordion" id="accordion2">
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+		  What does a donation offer me?
+		  </a>
+	      </div>
+	      <div id="collapseOne" class="accordion-body collapse">
+		<div class="accordion-inner">
+		  A huge thanks from the development team and future credit for use towards purchasing experiences from locals.
+		</div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		  What benefit do I get?
+		</a>
+	      </div>
+	      <div id="collapseTwo" class="accordion-body collapse">
+		<div class="accordion-inner">
+		  As a traveler, have a local show you around their neighborhood and find the best spots.  As
+		  a local, earn a little extra cash by setting a rate for taking someone out.  Both of you earn 
+		  a new friend.
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+	<!-- Not crucial, but we put this under a CC By-SA 3.0 license. -->
+	<!-- http://creativecommons.org/licenses/ -->
+	<div class="row-fluid footer">
+	  <div class="span12">
+	    <p>This work is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC By-SA 3.0
+		</a>, without all the cruft
+	      </p>
+	    </div>
+	  </div>
+	</div>
+     
+    </body>
+  </html>
