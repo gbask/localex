@@ -72,7 +72,7 @@ module.exports = function(app) {
 	
 		var tmp_path = req.files.image.path;
 		var target_path = './app/public/img/users/' + req.files.image.name;
-		var picture_path = './images/users/' + req.files.image.name;
+		var picture_path = './img/users/' + req.files.image.name;
 		fs.rename(tmp_path, target_path, function(err) {
 			if(err) throw err;
 			fs.unlink(tmp_path, function() {
@@ -209,6 +209,16 @@ module.exports = function(app) {
 	app.get('/reset', function(req, res) {
 		AM.delAllRecords(function(){
 			res.redirect('/print');	
+		});
+	});
+	
+	app.get('/users/:id', function(req, res) {
+		AM.findById(req.params.id, function(error, o) {
+			res.render('user_page.jade',
+				{title: req.param('name'),
+					profile: o
+				}
+				);
 		});
 	});
 	

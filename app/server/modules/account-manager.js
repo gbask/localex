@@ -184,7 +184,7 @@ var getObjectId = function(id)
 	return accounts.db.bson_serializer.ObjectID.createFromHexString(id)
 }
 
-var findById = function(id, callback)
+exports.findById = function(id, callback)
 {
 	accounts.findOne({_id: getObjectId(id)},
 		function(e, res) {

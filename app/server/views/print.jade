@@ -15,7 +15,8 @@ block content
 			- for (var i = 0; i < accts.length; i++)
 				tr
 					td= i+1
-					td= accts[i].name
+					td
+						a(href="/users/"+accts[i]._id.toHexString())!=accts[i].name
 					td= accts[i].country
 					td= accts[i].user
 					td= accts[i].date

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	div.container(style='margin:20px')
+		h1= profile.name
+		h3= profile.country
+		img(src = '/../' + profile.image)
+		
+
