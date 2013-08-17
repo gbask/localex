@@ -5,7 +5,7 @@
 input(type='hidden', value= user._id)#userId
 
 #account-form-container
-	form( method="post")#account-form.form-horizontal.well.span6
+	form( method="post", enctype="multipart/form-data")#account-form.form-horizontal.well.span6
 		h1
 		p#sub1.subheading Please tell us a little about yourself.
 		hr
@@ -18,6 +18,10 @@ input(type='hidden', value= user._id)#userId
 				label.control-label(for='email-tf') Email
 				.controls
 					input#email-tf.input-xlarge(type='text', name='email', value= user.email)
+			#image-cg.control-group
+				label.control-label(for='image-tf') Image
+				.controls
+					input#image-tf.input-xlarge(type='file', name='image', value = user.image)
 			#city-cg.control-group
 				label.control-label(for='city-tf') City
 				.controls

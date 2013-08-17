@@ -16,7 +16,7 @@ app.configure(function(){
 	app.locals.pretty = true;
 //	app.use(express.favicon());
 //	app.use(express.logger('dev'));
-	app.use(express.bodyParser());
+	app.use(express.bodyParser({uploadDir: './app/public/img/users'}));
 	app.use(express.cookieParser());
 	app.use(express.session({ secret: 'super-duper-secret-secret' }));
 	app.use(express.methodOverride());

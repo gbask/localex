@@ -82,6 +82,7 @@ exports.updateAccount = function(newData, callback)
 		o.city		= newData.city;
 		o.state		= newData.state;
 		o.country 	= newData.country;
+		o.image		= newData.image;
 		if (newData.pass == ''){
 			accounts.save(o, {safe: true}, function(err) {
 				if (err) callback(err);

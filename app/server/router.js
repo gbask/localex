@@ -69,6 +69,16 @@ module.exports = function(app) {
 	});
 	
 	app.post('/home', function(req, res){
+	
+		var tmp_path = req.files.image.path;
+		var target_path = './app/public/img/users/' + req.files.image.name;
+		var picture_path = './images/users/' + req.files.image.name;
+		fs.rename(tmp_path, target_path, function(err) {
+			if(err) throw err;
+			fs.unlink(tmp_path, function() {
+				if(err) throw err;
+			});
+		});
 		if (req.param('user') != undefined) {
 			AM.updateAccount({
 				user 		: req.param('user'),
@@ -77,7 +87,8 @@ module.exports = function(app) {
 				city		: req.param('city'),
 				state		: req.param('state'),
 				country 	: req.param('country'),
-				pass		: req.param('pass')
+				pass		: req.param('pass'),
+				image		: picture_path
 			}, function(e, o){
 				if (e){
 					res.send('error-updating-account', 400);
@@ -112,7 +123,8 @@ module.exports = function(app) {
 			state	: req.param('state'),
 			user 	: req.param('user'),
 			pass	: req.param('pass'),
-			country : req.param('country')
+			country : req.param('country'),
+			image	: req.param('image')
 		}, function(e){
 			if (e){
 				res.send(e, 400);
