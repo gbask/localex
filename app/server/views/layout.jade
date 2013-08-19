@@ -1,9 +1,19 @@
 !!! 5
 html
 	head
-		title Node.js Login
-		link(rel='stylesheet', href='/vendor/bootstrap.min.css')
-		link(rel='stylesheet', href='/css/style.css')
+		title Local Experience
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-combined.no-icons.min.css")
+		link(rel="stylesheet", href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css")
+		link(rel="stylesheet", href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fsocial-buttons.css")
+		script(src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fjquery.js")
+		script(src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap.js")
+		link(href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic", rel="stylesheet", type="text/css")
+		link(href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800", rel="stylesheet", type="text/css")
+		style(type="text/css")
+		//link(rel='stylesheet', href='/vendor/bootstrap.min.css')
+		//link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/basic_style.css')
 		script(type='text/javascript')
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-1890531-10']);
@@ -14,8 +24,24 @@ html
 				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			})();
-	body
-		a(href="http://github.com/braitsch/node-login")
-			img#github-banner(style="position:absolute;top:0px;right:0;border:0;", src="https://a248.e.akamai.net/camo.github.com/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67", alt="Fork me on GitHub")
-	block content
+	body(data-spy="scroll", data-target=".navbar", data-offset="50")
+		div.navbar.navbar-inverse.navbar-fixed-top
+			div.navbar-inner
+				div.container
+					button(type="button", class="btn btn-navbar", data-toggle="collapse", data-target=".nav-collapse")
+						span(class="icon-bar")
+						span(class="icon-bar")
+						span(class="icon-bar")
+					a(class="brand", href='/') LocalEx
+					div(class="nav-collapse collapse")
+						ul(class="nav")
+							li
+								a(href="/list") Experiences
+							li
+								a(href="/#about") About
+							li
+								a(href="/contact") Contact
+						ul(class="nav pull-right")
+							a(href = "/login", class="btn btn-primary") Sign Up
+		block content
 	block scripts

@@ -2,8 +2,11 @@ extends layout
 
 block content
 	div.container(style='margin:20px')
-		h1= profile.name
-		h3= profile.country
-		img(src = '/../' + profile.image)
+		div(class = 'row-fluid heading')
+			div(class = 'span6')
+				h1= profile.name
+				h3= profile.country
+			div(class = 'span3')
+				img(class="img-polaroid", src = '/../' + profile.image, width ="250", height ="250")
 		
 

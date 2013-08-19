@@ -3,6 +3,7 @@ var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
+var gm = require('gm').subClass({ imageMagick: true});
 var fs = require('fs');
 var homepage_buf = new Buffer(fs.readFileSync('app/server/views/index.html'));
 var contact_buf = new Buffer(fs.readFileSync('app/server/views/contact.html'));
@@ -56,7 +57,7 @@ module.exports = function(app) {
 // logged-in user homepage //
 	
 	app.get('/home', function(req, res) {
-	    if (req.session.user == null){
+	    if (req.session.user === null){
 	// if user is not logged-in redirect back to login page //
 	        res.redirect('/');
 	    }   else{
@@ -69,16 +70,21 @@ module.exports = function(app) {
 	});
 	
 	app.post('/home', function(req, res){
-	
-		var tmp_path = req.files.image.path;
-		var target_path = './app/public/img/users/' + req.files.image.name;
-		var picture_path = './img/users/' + req.files.image.name;
-		fs.rename(tmp_path, target_path, function(err) {
-			if(err) throw err;
-			fs.unlink(tmp_path, function() {
+		if (req.files.image != null) {
+			var tmp_path = req.files.image.path;
+			
+			var target_path = './app/public/img/users/' + req.files.image.name;
+			var picture_path = './img/users/' + req.files.image.name;
+			fs.rename(tmp_path, target_path, function(err) {
 				if(err) throw err;
+				fs.unlink(tmp_path, function() {
+					if(err) throw err;
+				});
 			});
-		});
+		}
+		//gm(tmp_path).resize(100, 100).write(target_path, function(err) {
+			//if(err) throw err;
+		//});
 		if (req.param('user') != undefined) {
 			AM.updateAccount({
 				user 		: req.param('user'),
@@ -102,7 +108,7 @@ module.exports = function(app) {
 					res.send('ok', 200);
 				}
 			});
-		}	else if (req.param('logout') == 'true'){
+		}	else if (req.param('logout') === 'true'){
 			res.clearCookie('user');
 			res.clearCookie('pass');
 			req.session.destroy(function(e){ res.send('ok', 200); });
@@ -191,6 +197,12 @@ module.exports = function(app) {
 	app.get('/print', function(req, res) {
 		AM.getAllRecords( function(e, accounts){
 			res.render('print', { title : 'Account List', accts : accounts });
+		})
+	});
+	
+	app.get('/list', function(req, res) {
+		AM.getAllRecords( function(e, accounts){
+			res.render('list', {accts : accounts });
 		})
 	});
 	
