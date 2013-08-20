@@ -234,6 +234,15 @@ module.exports = function(app) {
 		});
 	});
 	
+	app.get('/list/CA', function(req, res) {
+		AM.findByMultipleFields([{state:'california'}], function(e, accounts){
+			console.log(accounts)
+			if(accounts != null) {
+				res.render('list', {accts: accounts});
+			}
+		});
+	});
+	
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

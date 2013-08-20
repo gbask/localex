@@ -194,10 +194,11 @@ exports.findById = function(id, callback)
 };
 
 
-var findByMultipleFields = function(a, callback)
+exports.findByMultipleFields = function(a, callback)
 {
 // this takes an array of name/val pairs to search against {fieldName : 'value'} //
 	accounts.find( { $or : a } ).toArray(
+	//accounts.find( {state:'california'}).toArray(
 		function(e, results) {
 		if (e) callback(e)
 		else callback(null, results)
