@@ -5,6 +5,7 @@ var EM = require('./modules/email-dispatcher');
 
 var gm = require('gm').subClass({ imageMagick: true});
 var fs = require('fs');
+var url = require('url');
 var homepage_buf = new Buffer(fs.readFileSync('app/server/views/index.html'));
 var contact_buf = new Buffer(fs.readFileSync('app/server/views/contact.html'));
 
@@ -13,6 +14,20 @@ module.exports = function(app) {
 // home page //
 	app.get('/', function(req, res){
 		res.send(homepage_buf.toString('utf-8'));
+		var queryObject = url.parse(req.url,true).query;
+		console.log(queryObject);
+		if(queryObject.state != '' && queryObject.city == '') {
+			res.redirect('/list/' + queryObject.state);
+		} else if (queryObject.state == '' && queryObject.city != '') {
+			res.redirect('/list/city/' + queryObject.city);
+		} else if (queryObject.state != null && queryObject.city != null) {
+			res.redirect('/list/' + queryObject.state + '/' + queryObject.city);
+		}
+	});
+	
+	app.post('/', function(req, res) {
+		var queryObject = url.parse(req.url,true).query;
+		console.log(queryObject);
 	});
 	
 // contact page //
@@ -234,9 +249,24 @@ module.exports = function(app) {
 		});
 	});
 	
-	app.get('/list/CA', function(req, res) {
-		AM.findByMultipleFields([{state:'california'}], function(e, accounts){
-			console.log(accounts)
+	app.get('/list/:sta', function(req, res) {
+		AM.findByMultipleFields([{state:req.params.sta}], function(e, accounts){
+			if(accounts != null) {
+				res.render('list', {accts: accounts});
+			}
+		});
+	});
+	
+	app.get('/list/city/:city', function(req, res) {
+		AM.findByMultipleFields([{city:req.params.city}], function(e, accounts){
+			if(accounts != null) {
+				res.render('list', {accts: accounts});
+			}
+		});
+	});
+	
+	app.get('/list/:sta/:city', function(req, res) {
+		AM.findByMultipleFields([{state:req.params.sta, city:req.params.city}], function(e, accounts){
 			if(accounts != null) {
 				res.render('list', {accts: accounts});
 			}
