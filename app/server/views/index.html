@@ -44,6 +44,10 @@
       /* Main body and headings */
       body{
         font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+		background: url('./img/background.jpg');
+		background-size: 1400px 625px;
+		background-position: center 40px;
+		background-repeat:no-repeat;
       }
       .heading, .subheading {
         font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -100,6 +104,7 @@
   </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
+
   <!-- Mobile-firendly navbar adapted from example. -->
   <!-- http://twitter.github.io/bootstrap/examples/starter-template.html -->
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -131,6 +136,7 @@
 
     </div>
   </div>
+
 				    
   <!-- We use row-fluid inside containers to achieve a resizable layout. -->
   <!-- blogs.endjin.com/2013/04/tips-for-implementing-responsive-designs-using-bootstrap/ -->
@@ -151,13 +157,26 @@
 	  <p class="lead">Meet a local with your interests and experience the best places in their city.</p>
 	</div>
       </div>
-      <div class="row-fluid pitch">
-	<div class="span5 offset1 video">
-	  <img class="img-polaroid" src="http://c69282.r82.cf3.rackcdn.com/IMG_4303.jpg">
+	  
+	<div class="row-fluid subheading">
+		<div class="span12">
+			<h2>Where To?</h2>
+		</div>
 	</div>
+	<div class="row-fluid subheading">
+		<div class="span12">
+			<form class="form-inline">
+				<input type="text" class="input-large" name="city" placeholder="City">
+				<input type="text" class="input-large" name="state" placeholder="State">
+				<button type="submit" class="btn">Go!</button>
+			</form>
+		</div>
+	</div>
+	  
+      <div class="row-fluid pitch">
 	
 	<!-- We define a new 'actions' div to contain stats, order, and share buttons. -->
-	<div class="span5 actions">
+	<div class="span5 offset1 actions">
 	  <div class="span8 offset2">
 	    <div class="statistics">
 	      <div class="span4">
@@ -227,7 +246,7 @@
 
       <div class="row-fluid section1" id="about">
 	<div class="span5 offset1 asset">
-	  <img class="img-polaroid" src="http://c69282.r82.cf3.rackcdn.com/Pr_25_-_TRS_-_23_04_10_0748.jpg">
+	  <img class="img-polaroid" src="http://placehold.it/480x300">
 	</div>
 	<div class="span5 copy">
 	  <p>
