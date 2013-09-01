@@ -19,6 +19,7 @@ var db = new MongoDB(dbName, new Server(dbHost, dbPort, {auto_reconnect: true}),
 	}
 });
 var accounts = db.collection('accounts');
+var locations = db.collection('locations');
 
 /* login validation methods */
 
@@ -83,6 +84,8 @@ exports.updateAccount = function(newData, callback)
 		o.state		= newData.state;
 		o.country 	= newData.country;
 		o.image		= newData.image;
+		o.description = newData.description;
+		o.tag_line 	= newData.tag_line;
 		if (newData.pass == ''){
 			accounts.save(o, {safe: true}, function(err) {
 				if (err) callback(err);
@@ -113,6 +116,22 @@ exports.updatePassword = function(email, newPass, callback)
 		}
 	});
 }
+
+exports.addCommentToArticle = function(userId, comment, callback) {
+	console.log("AM: " + comment.person + comment.comment)
+	accounts.update(
+		{_id: getObjectId(userId)},
+		{"$push": {comments: comment}},
+		function(error, article){
+			if(error){
+				console.log(error);
+				callback(error);
+			}
+			else callback(null, article)
+		});
+		
+}
+
 
 /* account lookup methods */
 
@@ -202,5 +221,13 @@ exports.findByMultipleFields = function(a, callback)
 		function(e, results) {
 		if (e) callback(e)
 		else callback(null, results)
+	});
+}
+
+exports.populateLocationCountTables = function(callback)
+{
+	this.getAllRecords( function(e, accounts) {
+		console.log('nailed it: ' + accounts.length);
+		callback(null);
 	});
 }

@@ -4,32 +4,50 @@ block content
 	div.container(class='container-fluid', style='margin:20px')
 		div(class='row-fluid')
 			div.span3
-			div.span9
-				
-						- for (var i = 0; i < accts.length; i+=3)
-							div(class = 'row-fluid')
-								ul(class = 'thumbnails')
-									li(class = 'span4')
-										div(class = 'thumbnail', style = 'text-align:center')
-											a(href="/users/"+accts[i]._id.toHexString())
-												img(src = '/../' + accts[i].image, width = '250', height = '200')
-												h3(class='text-center') #{accts[i].name}
-												p(class='text-center') #{accts[i].city}, #{accts[i].state}
-									if(i+1 < accts.length)
-										li(class = 'span4')
-											div(class = 'thumbnail', style = 'text-align:center')
-												a(href="/users/"+accts[i+1]._id.toHexString())
-													img(src = '/../' + accts[i+1].image, width = '250', height = '200')
-													h3(class='text-center') #{accts[i+1].name}
-													p(class='text-center') #{accts[i+1].city}, #{accts[i+1].state}
-									if(i+2 < accts.length)
-										li(class = 'span4')
-											div(class = 'thumbnail', style = 'text-align:center')
-												a(href="/users/"+accts[i+2]._id.toHexString())
-													img(src = '/../' + accts[i+2].image, width = '250', height = '200')
-													h3(class='text-center') #{accts[i+2].name}
-													p(class='text-center') #{accts[i+2].city}, #{accts[i+2].state}
+				if(countries != null)
+					div.span10
+						div(class='well')
+							ul(class='nav nav-list')
+								li(class='nav-header') List by Country
+								- for (var i = 0; i < countries.length; i++)
+									a(href = '#')
+										li #{countries[i].country} (#{countries[i].country_len})
+								li(class='divider') 
+								li(class='nav-header') Listing by State
+								- for (var j = 0; j < states.length; j++)
+									a(href='/list/' + states[j].state)
+										li #{states[j].state} (#{states[j].state_len})
+								li(class='divider')
+								li(class='nav-header') Listing by City
+								- for (var k = 0; k < cities.length; k++)
+									a(href='/list/city/' + cities[k].city)
+										li #{cities[k].city} (#{cities[k].city_len})
 					
-						
-									
-						
+			div.span9
+				- for (var i = 0; i < accts.length; i+=3)
+					div(class = 'row-fluid')
+						ul(class = 'thumbnails')
+							li(class = 'span4')
+								div(class = 'thumbnail', style = 'text-align:center')
+									a(href="/users/"+accts[i]._id.toHexString())
+										img(src = '/../' + accts[i].image, width = '250', height = '200')
+										h3(class='text-center') #{accts[i].name}
+										p(class='text-center') #{accts[i].city}, #{accts[i].state}
+							if(i+1 < accts.length)
+								li(class = 'span4')
+									div(class = 'thumbnail', style = 'text-align:center')
+										a(href="/users/"+accts[i+1]._id.toHexString())
+											img(src = '/../' + accts[i+1].image, width = '250', height = '200')
+											h3(class='text-center') #{accts[i+1].name}
+											p(class='text-center') #{accts[i+1].city}, #{accts[i+1].state}
+							if(i+2 < accts.length)
+								li(class = 'span4')
+									div(class = 'thumbnail', style = 'text-align:center')
+										a(href="/users/"+accts[i+2]._id.toHexString())
+											img(src = '/../' + accts[i+2].image, width = '250', height = '200')
+											h3(class='text-center') #{accts[i+2].name}
+											p(class='text-center') #{accts[i+2].city}, #{accts[i+2].state}
+			
+				
+							
+				

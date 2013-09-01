@@ -1,12 +1,39 @@
 extends layout
 
 block content
-	div.container(style='margin:20px')
+	div.container(class='container-fluid', style='margin:20px')
 		div(class = 'row-fluid heading')
-			div(class = 'span6')
-				h1= profile.name
-				h3= profile.country
 			div(class = 'span3')
 				img(class="img-polaroid", src = '/../' + profile.image, width ="250", height ="250")
-		
-
+				div(class='row-fluid')
+					div(class='span12')
+						h2=profile.name
+						h4=profile.city + ', ' + profile.state
+					div(class='row-fluid')
+						div(class='span12')
+							button(class='btn btn-success', type='button') Contact
+			div(class = 'span9')
+				h1= profile.tag_line
+				div(class='hero-unit')
+					p(class='text-left')=profile.description
+		div(class='row-fluid copy')
+			div(class='span3')
+				form(method='post', action='/users/addComment')
+					fieldset
+						legend
+						legend Leave a Review
+						input(type='hidden', name='_id', value=profile._id.toHexString())
+						label Author:
+						input(class='input-block-level', type='text', name='person', id='addCommentPerson')
+						label Comment:
+						textarea(class='input-block-level', name='comment', rows=3, id='addCommentComment')
+						button(class='btn btn-inverse', type='submit', value='Send') Submit
+			div(class='span6')
+				div(class='media')
+				if(profile.comments != null) 
+					-each comment in profile.comments				
+						a(class='pull-left', href='#')
+							img(class='media-object', data-src='holder.js/64x64')
+						div(class='media-body')
+							h4(class='media-heading')= comment.person
+							p= comment.comment

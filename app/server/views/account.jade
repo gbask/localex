@@ -37,6 +37,18 @@ input(type='hidden', value= user._id)#userId
 						each item in countries
 							option(selected=item.name == user.country)= item.name
 			hr
+			p#sub3.subheading
+			#tag_line-cg.control-group
+				label.control-label(for='tag_line-tf') Tag Line
+				.controls
+					input#tag_line-tf.input-xlarge.disabled(type='text', name='tag_line', value = user.tag_line)
+			#description-cg.control-group
+				label.control-label(for='description-tf') Describe Your Activity
+				if(user.description != '')
+					text_box = user.description
+				.controls
+					textarea#description-tf.input-xlarge.disabled(type='textarea', rows='3', name='description') #{user.description} 
+			hr
 			p#sub2.subheading
 			#user-cg.control-group
 				label.control-label(for='user-tf') Username

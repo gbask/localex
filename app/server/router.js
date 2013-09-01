@@ -15,7 +15,12 @@ module.exports = function(app) {
 	app.get('/', function(req, res){
 		res.send(homepage_buf.toString('utf-8'));
 		var queryObject = url.parse(req.url,true).query;
-		console.log(queryObject);
+		//console.log(queryObject);
+		
+		AM.populateLocationCountTables(function(e, accounts) {
+			console.log('made it');
+		});
+		
 		if(queryObject.state != '' && queryObject.city == '') {
 			res.redirect('/list/' + queryObject.state);
 		} else if (queryObject.state == '' && queryObject.city != '') {
@@ -101,15 +106,18 @@ module.exports = function(app) {
 			//if(err) throw err;
 		//});
 		if (req.param('user') != undefined) {
+			console.log(req.param.comments);
 			AM.updateAccount({
 				user 		: req.param('user'),
 				name 		: req.param('name'),
 				email 		: req.param('email'),
-				city		: req.param('city'),
-				state		: req.param('state'),
+				city		: ucFirstAllWords(req.param('city')),
+				state		: ucFirstAllWords(req.param('state')),
 				country 	: req.param('country'),
 				pass		: req.param('pass'),
-				image		: picture_path
+				image		: picture_path,
+				tag_line	: req.param('tag_line'),
+				description : req.param('description')
 			}, function(e, o){
 				if (e){
 					res.send('error-updating-account', 400);
@@ -137,15 +145,29 @@ module.exports = function(app) {
 	});
 	
 	app.post('/signup', function(req, res){
+		if (req.files.image != null) {
+			var tmp_path = req.files.image.path;
+			
+			var target_path = './app/public/img/users/' + req.files.image.name;
+			var picture_path = './img/users/' + req.files.image.name;
+			fs.rename(tmp_path, target_path, function(err) {
+				if(err) throw err;
+				fs.unlink(tmp_path, function() {
+					if(err) throw err;
+				});
+			});
+		}
 		AM.addNewAccount({
 			name 	: req.param('name'),
 			email 	: req.param('email'),
-			city	: req.param('city'),
-			state	: req.param('state'),
+			city	: ucFirstAllWords(req.param('city')),
+			state	: ucFirstAllWords(req.param('state')),
 			user 	: req.param('user'),
 			pass	: req.param('pass'),
 			country : req.param('country'),
-			image	: req.param('image')
+			image	: req.param('image'),
+			tag_line: req.param('tag_line'),
+			description: req.param('description')
 		}, function(e){
 			if (e){
 				res.send(e, 400);
@@ -216,9 +238,117 @@ module.exports = function(app) {
 	});
 	
 	app.get('/list', function(req, res) {
+		var country_array = [];
+		var state_array = [];
+		var city_array = [];
+		var c_counter = 0;
+		var c_index = 0;
+		var s_counter = 0;
+		var s_index = 0;
+		var ci_counter = 0;
+		var ci_index = 0;
+		//var count;
+
+		AM.getAllRecords( function(e, accounts){
+			console.log(accounts.length);
+			for(var i = 0; i < accounts.length; i++) {
+				var cnty = accounts[i].country;
+				for(var j = 0; j < country_array.length; j++) {
+					if(country_array[j].country == accounts[i].country) {
+						c_counter += 1;
+						c_index = j;
+						//break;
+					}
+				}
+				if(c_counter == 0) {
+					new_array = {country: accounts[i].country, country_len: 1};
+					country_array.push(new_array);
+				}
+				else {
+					country_array[c_index].country_len += 1;
+					c_counter = 0;
+				}
+				
+				for(var k = 0; k < state_array.length; k++) {
+					if(state_array[k].state == accounts[i].state) {
+						s_counter += 1;
+						s_index = k;
+					}
+				}
+				if(s_counter == 0) {
+					new_array = {state: accounts[i].state, state_len: 1};
+					state_array.push(new_array);
+				}
+				else {
+					state_array[s_index].state_len += 1;
+					s_counter = 0;
+				}
+				
+				for(var l = 0; l < city_array.length; l++) {
+					if(city_array[l].city == accounts[i].city) {
+						ci_counter += 1;
+						ci_index = l;
+					}
+				}
+				if(ci_counter == 0) {
+					new_array = {city: accounts[i].city, city_len: 1};
+					city_array.push(new_array);
+				}
+				else {
+					city_array[ci_index].city_len += 1;
+					ci_counter = 0;
+				}
+					
+			}
+				/* TODO: Determine async issues with using 'findByMultipleFields'
+				
+					//var new_cnty = accounts[i].country;
+					var object_length = function() {
+						var count = AM.findByMultipleFields([{country: 'United States'}], function(e, clist){
+							//var new_clist_array = {country: new_cnty, country_len: clist.length};
+							//country_array.push(new_clist_array);
+							//console.log(country_array);
+							//console.log(clist.length);
+							return clist.length
+						});
+						console.log(count);
+						return count;
+					}
+					
+					
+					
+					
+					var clist_array = {country: cnty, country_len: count};
+					country_array.push(clist_array);
+				}
+				else {
+					c_counter = 0;
+				}
+			}
+			
+
+			console.log(country_array);
+			*/
+			res.render('list', {accts : accounts, countries: country_array, states: state_array, cities: city_array });
+		});
+			/*
+			for(var i = 1; i < accounts.length; i++) {
+				AM.findByMultipleFields
+		AM.findByMultipleFields([{country:'Poland'}], function(e, clist){
+			if(clist != null) {
+				var clist_array = [{country:'Poland', country_len: clist.length}, {'United States': clist.length}];
+				for(var i = 0; i < clist_array.length; i++) {
+					if(clist_array[i].country == 'Poland') {
+						console.log(clist_array[i].country_len);
+					}
+				}
+			}
+		
+		});
 		AM.getAllRecords( function(e, accounts){
 			res.render('list', {accts : accounts });
-		})
+		});
+		*/
 	});
 	
 	app.post('/delete', function(req, res){
@@ -250,7 +380,7 @@ module.exports = function(app) {
 	});
 	
 	app.get('/list/:sta', function(req, res) {
-		AM.findByMultipleFields([{state:req.params.sta}], function(e, accounts){
+		AM.findByMultipleFields([{state:ucFirstAllWords(req.params.sta)}], function(e, accounts){
 			if(accounts != null) {
 				res.render('list', {accts: accounts});
 			}
@@ -258,7 +388,8 @@ module.exports = function(app) {
 	});
 	
 	app.get('/list/city/:city', function(req, res) {
-		AM.findByMultipleFields([{city:req.params.city}], function(e, accounts){
+		AM.findByMultipleFields([{city:ucFirstAllWords(req.params.city)}], function(e, accounts){
+			console.log(accounts)
 			if(accounts != null) {
 				res.render('list', {accts: accounts});
 			}
@@ -266,13 +397,34 @@ module.exports = function(app) {
 	});
 	
 	app.get('/list/:sta/:city', function(req, res) {
-		AM.findByMultipleFields([{state:req.params.sta, city:req.params.city}], function(e, accounts){
+		AM.findByMultipleFields([{state:ucFirstAllWords(req.params.sta), city:ucFirstAllWords(req.params.city)}], function(e, accounts){
 			if(accounts != null) {
 				res.render('list', {accts: accounts});
 			}
 		});
 	});
 	
+	app.post('/users/addComment', function(req, res) {
+		AM.addCommentToArticle(req.param('_id'), {
+			person: req.param('person'),
+			comment: req.param('comment'),
+			create_at: new Date()
+		}, function(error, docs) {
+			res.redirect('/users/' + req.param('_id'))
+			});
+	});
+	
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };
+
+function ucFirstAllWords( str )
+{
+    var pieces = str.split(" ");
+    for ( var i = 0; i < pieces.length; i++ )
+    {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+    }
+    return pieces.join(" ");
+}
