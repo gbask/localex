@@ -35,8 +35,8 @@ function HomeController()
 	{
 		var that = this;
 		$.ajax({
-			url: "/",
-			type: "POST",
+			url: '/home',
+			type: 'POST',
 			data: {logout : true},
 			success: function(data){
 	 			that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');

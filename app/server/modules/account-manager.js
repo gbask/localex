@@ -224,10 +224,73 @@ exports.findByMultipleFields = function(a, callback)
 	});
 }
 
-exports.populateLocationCountTables = function(callback)
+exports.populateLocationCountTables = function(a, callback)
 {
-	this.getAllRecords( function(e, accounts) {
-		console.log('nailed it: ' + accounts.length);
-		callback(null);
-	});
+	var country_array = [];
+	var state_array = [];
+	var city_array = [];
+	var c_counter = 0;
+	var c_index = 0;
+	var s_counter = 0;
+	var s_index = 0;
+	var ci_counter = 0;
+	var ci_index = 0;
+	
+	console.log(a);
+	
+	if(a != null) {
+	//this.getAllRecords( function(e, accounts) {
+		
+		for(var i = 0; i < a.length; i++) {
+			var cnty = a[i].country;
+			for(var j = 0; j < country_array.length; j++) {
+				if(country_array[j].country == a[i].country) {
+					c_counter += 1;
+					c_index = j;
+					//break;
+				}
+			}
+			if(c_counter == 0) {
+				new_array = {country: a[i].country, country_len: 1};
+				country_array.push(new_array);
+			}
+			else {
+				country_array[c_index].country_len += 1;
+				c_counter = 0;
+			}
+			
+			for(var k = 0; k < state_array.length; k++) {
+				if(state_array[k].state == a[i].state) {
+					s_counter += 1;
+					s_index = k;
+				}
+			}
+			if(s_counter == 0) {
+				new_array = {state: a[i].state, state_len: 1};
+				state_array.push(new_array);
+			}
+			else {
+				state_array[s_index].state_len += 1;
+				s_counter = 0;
+			}
+			
+			for(var l = 0; l < city_array.length; l++) {
+				if(city_array[l].city == a[i].city) {
+					ci_counter += 1;
+					ci_index = l;
+				}
+			}
+			if(ci_counter == 0) {
+				new_array = {city: a[i].city, city_len: 1};
+				city_array.push(new_array);
+			}
+			else {
+				city_array[ci_index].city_len += 1;
+				ci_counter = 0;
+			}
+				
+		}
+		callback(null, country_array, state_array, city_array);
+	}
+	//});
 }

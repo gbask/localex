@@ -1,21 +1,33 @@
+!!! 5
+html
+	head
+		title Local Experience
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap-combined.no-icons.min.css")
+		link(rel="stylesheet", href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css")
+		link(rel="stylesheet", href="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fsocial-buttons.css")
+		script(src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fjquery.js")
+		script(src="https://d396qusza40orc.cloudfront.net/startup%2Fcode%2Fbootstrap.js")
+		link(href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic", rel="stylesheet", type="text/css")
+		link(href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700,800", rel="stylesheet", type="text/css")
+		link(rel='stylesheet', href='/css/basic_style.css')
 
-extends layout
+			
+	block content
+		div.navbar.navbar-fixed-top
+			div.navbar-inner
+				div.container-fluid
+					ul#global-nav.nav.pull-left
+						a(href='#').brand Control Panel
+					button(id='btn-logout', class='btn btn-primary')
+						i.icon-lock.icon-white
+						| Sign Out
 
-block content
-	div.navbar.navbar-fixed-top
-		div.navbar-inner
-			div.container-fluid
-				ul#global-nav.nav.pull-left
-					a(href='#').brand Control Panel
-				button#btn-logout.btn.btn-primary
-					i.icon-lock.icon-white
-					| Sign Out
+		include account
+		include modals/alert
+		include modals/confirm
 
-	include account
-	include modals/alert
-	include modals/confirm
 
-block scripts
 	script(src='/vendor/jquery.min.js')
 	script(src='/vendor/jquery.form.js')
 	script(src='/vendor/bootstrap-modal.js')
@@ -23,4 +35,4 @@ block scripts
 	script(src='/js/views/home.js')
 	script(src='/js/controllers/homeController.js')
 	script(src='/js/form-validators/accountValidator.js')
-	script(src='/vendor/bootstrap.js')
+	//script(src='/vendor/bootstrap.js')

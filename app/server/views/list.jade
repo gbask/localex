@@ -10,7 +10,7 @@ block content
 							ul(class='nav nav-list')
 								li(class='nav-header') List by Country
 								- for (var i = 0; i < countries.length; i++)
-									a(href = '#')
+									a(href = '/list/country/' + countries[i].country)
 										li #{countries[i].country} (#{countries[i].country_len})
 								li(class='divider') 
 								li(class='nav-header') Listing by State
