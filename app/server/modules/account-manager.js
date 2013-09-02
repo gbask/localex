@@ -236,8 +236,6 @@ exports.populateLocationCountTables = function(a, callback)
 	var ci_counter = 0;
 	var ci_index = 0;
 	
-	console.log(a);
-	
 	if(a != null) {
 	//this.getAllRecords( function(e, accounts) {
 		

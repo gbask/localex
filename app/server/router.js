@@ -15,7 +15,6 @@ module.exports = function(app) {
 	app.get('/', function(req, res){
 		res.send(homepage_buf.toString('utf-8'));
 		var queryObject = url.parse(req.url,true).query;
-		//console.log(queryObject);
 		
 		if(queryObject.state != '' && queryObject.city == '') {
 			res.redirect('/list/' + queryObject.state);
@@ -28,7 +27,6 @@ module.exports = function(app) {
 	
 	app.post('/', function(req, res) {
 		var queryObject = url.parse(req.url,true).query;
-		console.log(queryObject);
 	});
 	
 // contact page //
@@ -89,7 +87,6 @@ module.exports = function(app) {
 		if(!req.param('logout') ) {
 			if (req.files.image != null) {
 				var tmp_path = req.files.image.path;
-				
 				var target_path = './app/public/img/users/' + req.files.image.name;
 				var picture_path = './img/users/' + req.files.image.name;
 				fs.rename(tmp_path, target_path, function(err) {
@@ -104,7 +101,6 @@ module.exports = function(app) {
 			//if(err) throw err;
 		//});
 		if (req.param('user') != undefined) {
-			console.log(picture_path);
 			AM.updateAccount({
 				user 		: req.param('user'),
 				name 		: req.param('name'),
@@ -155,8 +151,6 @@ module.exports = function(app) {
 				});
 			});
 		}
-		
-		console.log('image tracking: ' + picture_path);
 		
 		AM.addNewAccount({
 			name 	: req.param('name'),
