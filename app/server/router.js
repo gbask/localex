@@ -3,7 +3,6 @@ var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
-var gm = require('gm').subClass({ imageMagick: true});
 var fs = require('fs');
 var url = require('url');
 var homepage_buf = new Buffer(fs.readFileSync('app/server/views/index.html'));
@@ -97,9 +96,7 @@ module.exports = function(app) {
 				});
 			}
 		}
-		//gm(tmp_path).resize(100, 100).write(target_path, function(err) {
-			//if(err) throw err;
-		//});
+
 		if (req.param('user') != undefined) {
 			AM.updateAccount({
 				user 		: req.param('user'),
