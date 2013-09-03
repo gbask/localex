@@ -4,22 +4,31 @@ var MongoDB 	= require('mongodb').Db;
 var Server 		= require('mongodb').Server;
 var moment 		= require('moment');
 
-var dbPort 		= 27017;
-var dbHost 		= 'localhost';
-var dbName 		= 'node-login';
+var dbPort 		= 10033;
+var dbHost 		= 'paulo.mongohq.com';
+var dbName 		= 'local_ex_sample_1';
+var dbUserName	= 'gbask';
+var dbPassword	= 'tonys1';
 
 /* establish the database connection */
 
 var db = new MongoDB(dbName, new Server(dbHost, dbPort, {auto_reconnect: true}), {w: 1});
-	db.open(function(e, d){
-	if (e) {
-		console.log(e);
-	}	else{
-		console.log('connected to database :: ' + dbName);
-	}
-});
+
+	db.open( function(err) {
+		db.authenticate(
+			dbUserName,
+			dbPassword,
+			function(err){
+				if (err) {
+				console.log(err);
+				}	else{
+					console.log('connected to database :: ' + dbName);
+				}
+			}
+		);
+	});
 var accounts = db.collection('accounts');
-var locations = db.collection('locations');
+
 
 /* login validation methods */
 
