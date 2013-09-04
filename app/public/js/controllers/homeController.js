@@ -14,6 +14,15 @@ function HomeController()
 // handle account deletion //
 	$('.modal-confirm .submit').click(function(){ that.deleteAccount(); });
 
+// handle image //
+	$('#btn-imageadd').click(function(){
+		filepicker.pickAndStore({mimetype:"image/*"},
+			{location:"S3"}, function(InkBlobs){
+				console.log(JSON.stringify(InkBlobs));
+			}
+		);
+	});
+
 	this.deleteAccount = function()
 	{
 		$('.modal-confirm').modal('hide');
