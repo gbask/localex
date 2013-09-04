@@ -7,7 +7,7 @@ var moment 		= require('moment');
 var dbPort 		= 10033;
 var dbHost 		= 'paulo.mongohq.com';
 var dbName 		= 'local_ex_sample_1';
-var dbUserName	= 'gbask';
+var dbUserName	= process.env.DB_USER_NAME;
 var dbPassword	= process.env.DB_PASSWORD;
 
 /* establish the database connection */
