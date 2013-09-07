@@ -175,20 +175,7 @@ module.exports = function(app) {
 		res.render('signup', {  title: 'Signup', countries : CT });
 	});
 	
-	app.post('/signup', function(req, res){
-		if (req.files.image != null) {
-			var tmp_path = req.files.image.path;
-			
-			var target_path = './app/public/img/users/' + req.files.image.name;
-			var picture_path = './img/users/' + req.files.image.name;
-			fs.rename(tmp_path, target_path, function(err) {
-				if(err) throw err;
-				fs.unlink(tmp_path, function() {
-					if(err) throw err;
-				});
-			});
-		}
-		
+	app.post('/signup', function(req, res){		
 		AM.addNewAccount({
 			name 	: req.param('name'),
 			email 	: req.param('email'),
@@ -196,10 +183,7 @@ module.exports = function(app) {
 			state	: ucFirstAllWords(req.param('state')),
 			user 	: req.param('user'),
 			pass	: req.param('pass'),
-			country : req.param('country'),
-			image	: picture_path,
-			tag_line: req.param('tag_line'),
-			description: req.param('description')
+			country : req.param('country')
 		}, function(e){
 			if (e){
 				res.send(e, 400);
@@ -288,13 +272,13 @@ module.exports = function(app) {
 			}
 	    });
 	});
-	
+	/*
 	app.get('/reset', function(req, res) {
 		AM.delAllRecords(function(){
 			res.redirect('/print');	
 		});
 	});
-	
+	*/
 	app.get('/users/:id', function(req, res) {
 		AM.findById(req.params.id, function(error, o) {
 			res.render('user_page.jade',

@@ -2,7 +2,9 @@
 extends layout
 
 block content
-	include account
+	div(class='row-fluid')
+		div(class='span6 offset1')
+			include account_signup
 	include modals/alert
 
 block scripts
