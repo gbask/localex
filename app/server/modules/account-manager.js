@@ -92,7 +92,7 @@ exports.updateAccount = function(newData, callback)
 		o.city		= newData.city;
 		o.state		= newData.state;
 		o.country 	= newData.country;
-		o.image		= newData.image;
+		//o.image		= newData.image;
 		o.description = newData.description;
 		o.tag_line 	= newData.tag_line;
 		if (newData.pass == ''){
@@ -111,6 +111,18 @@ exports.updateAccount = function(newData, callback)
 		}
 	});
 }
+
+exports.updateImage = function(newData, callback)
+{
+	accounts.findOne({user:newData.user}, function(e, o){
+		o.image = newData.image;
+		accounts.save(o, {safe: true}, function(err) {
+			if (err) callback(err);
+			else callback(null, o);
+		});
+	});
+}
+
 
 exports.updatePassword = function(email, newPass, callback)
 {

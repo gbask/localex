@@ -30,21 +30,21 @@ block content
 							li(class = 'span4')
 								div(class = 'thumbnail', style = 'text-align:center')
 									a(href="/users/"+accts[i]._id.toHexString())
-										img(src = '/../' + accts[i].image, width = '250', height = '200')
+										img(src = accts[i].image, width = '250', height = '200')
 										h3(class='text-center') #{accts[i].name}
 										p(class='text-center') #{accts[i].city}, #{accts[i].state}
 							if(i+1 < accts.length)
 								li(class = 'span4')
 									div(class = 'thumbnail', style = 'text-align:center')
 										a(href="/users/"+accts[i+1]._id.toHexString())
-											img(src = '/../' + accts[i+1].image, width = '250', height = '200')
+											img(src =  accts[i+1].image, width = '250', height = '200')
 											h3(class='text-center') #{accts[i+1].name}
 											p(class='text-center') #{accts[i+1].city}, #{accts[i+1].state}
 							if(i+2 < accts.length)
 								li(class = 'span4')
 									div(class = 'thumbnail', style = 'text-align:center')
 										a(href="/users/"+accts[i+2]._id.toHexString())
-											img(src = '/../' + accts[i+2].image, width = '250', height = '200')
+											img(src =  accts[i+2].image, width = '250', height = '200')
 											h3(class='text-center') #{accts[i+2].name}
 											p(class='text-center') #{accts[i+2].city}, #{accts[i+2].state}
 			

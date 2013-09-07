@@ -83,6 +83,29 @@ module.exports = function(app) {
 	});
 	
 	app.post('/home', function(req, res){
+		console.log(req.param('user'));
+		console.log(req.param('picURL'));
+		console.log(req.param('image'));
+/*		if(req.param('picURL') != undefined && req.param('user') != undefined) {
+			console.log('valid data: ' + req.param('picURL'));
+			AM.updateAccount({
+				user 		: req.param('user'),
+				image		: req.param('picURL')
+			}, function(e, o){
+				if (e){
+					res.send('error-updating-account', 400);
+				}	else{
+					req.session.user = o;
+			// update the user's login cookies if they exists //
+					if (req.cookies.user != undefined && req.cookies.pass != undefined){
+						res.cookie('user', o.user, { maxAge: 900000 });
+						res.cookie('pass', o.pass, { maxAge: 900000 });	
+					}
+					res.send('ok', 200);
+				}
+			});
+		} */
+		/*
 		if(!req.param('logout') ) {
 			if (req.files.image != null) {
 				var tmp_path = req.files.image.path;
@@ -96,8 +119,25 @@ module.exports = function(app) {
 				});
 			}
 		}
-
-		if (req.param('user') != undefined) {
+		*/
+		if(req.param('new_pic') === 'true') {
+			AM.updateImage({
+				user 		: req.param('user'),
+				image		: req.param('image')
+			}, function(e, o){
+				if (e){
+					res.send('error-updating-account', 400);
+				}	else{
+					req.session.user = o;
+			// update the user's login cookies if they exists //
+					if (req.cookies.user != undefined && req.cookies.pass != undefined){
+						res.cookie('user', o.user, { maxAge: 900000 });
+						res.cookie('pass', o.pass, { maxAge: 900000 });	
+					}
+					res.send('ok', 200);
+				}
+			});			
+		} else if (req.param('user') != undefined ) {
 			AM.updateAccount({
 				user 		: req.param('user'),
 				name 		: req.param('name'),
@@ -106,7 +146,7 @@ module.exports = function(app) {
 				state		: ucFirstAllWords(req.param('state')),
 				country 	: req.param('country'),
 				pass		: req.param('pass'),
-				image		: picture_path,
+				image		: req.param('image'),
 				tag_line	: req.param('tag_line'),
 				description : req.param('description')
 			}, function(e, o){
@@ -122,7 +162,7 @@ module.exports = function(app) {
 					res.send('ok', 200);
 				}
 			});
-		}	else if (req.param('logout') === 'true'){
+		} else if (req.param('logout') === 'true'){
 			res.clearCookie('user');
 			res.clearCookie('pass');
 			req.session.destroy(function(e){ res.send('ok', 200); });

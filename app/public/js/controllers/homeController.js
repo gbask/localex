@@ -14,14 +14,27 @@ function HomeController()
 // handle account deletion //
 	$('.modal-confirm .submit').click(function(){ that.deleteAccount(); });
 
-// handle image //
-	$('#btn-imageadd').click(function(){
-		filepicker.pickAndStore({mimetype:"image/*"},
-			{location:"S3"}, function(InkBlobs){
-				console.log(JSON.stringify(InkBlobs));
+// image //
+	$('#btn-imageadd').click(function(){ that.filePicker(); });
+	
+	this.filePicker = function()
+	{
+		var that = this;
+		filepicker.pick(function(InkBlob){
+			console.log(InkBlob.url);
+		$.ajax({
+			url: '/home',
+			type: 'POST',
+			data: {new_pic: true, image: InkBlob.url, user:$('#user-tf').val()},
+			success: function(data){	
+				that.UpdateSuccess('Added a Picture!');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 			}
-		);
-	});
+		}); 
+		});
+	}
 
 	this.deleteAccount = function()
 	{
@@ -46,16 +59,16 @@ function HomeController()
 		$.ajax({
 			url: '/home',
 			type: 'POST',
-			data: {logout : true},
-			success: function(data){
-	 			that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');
+			data: {logout: true},
+			success: function(data){	
+				that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 			}
 		});
 	}
-
+	
 	this.showLockedAlert = function(msg){
 		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
 		$('.modal-alert .modal-header h3').text('Success!');
@@ -64,6 +77,15 @@ function HomeController()
 		$('.modal-alert button').click(function(){window.location.href = '/';})
 		setTimeout(function(){window.location.href = '/';}, 3000);
 	}
+	
+	this.UpdateSuccess = function(msg)
+	{
+		$('.modal-alert').modal({ show : false, keyboard : true, backdrop : true });
+		$('.modal-alert .modal-header h3').text('Success!');
+		$('.modal-alert .modal-body p').html(msg);
+		$('.modal-alert').modal('show');
+		$('.modal-alert button').off('click');
+	}
 }
 
 HomeController.prototype.onUpdateSuccess = function()
@@ -71,6 +93,15 @@ HomeController.prototype.onUpdateSuccess = function()
 	$('.modal-alert').modal({ show : false, keyboard : true, backdrop : true });
 	$('.modal-alert .modal-header h3').text('Success!');
 	$('.modal-alert .modal-body p').html('Your account has been updated.');
+	$('.modal-alert').modal('show');
+	$('.modal-alert button').off('click');
+}
+
+HomeController.prototype.UpdateSuccess = function()
+{
+	$('.modal-alert').modal({ show : false, keyboard : true, backdrop : true });
+	$('.modal-alert .modal-header h3').text('Success!');
+	$('.modal-alert .modal-body p').html('Your picture has been updated');
 	$('.modal-alert').modal('show');
 	$('.modal-alert button').off('click');
 }

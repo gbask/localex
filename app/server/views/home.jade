@@ -22,15 +22,28 @@ html
 						button(id='btn-logout', class='btn btn-primary')
 							i.icon-lock.icon-white
 							| Sign Out
-
-			include account
+			div(class='row-fluid')
+				div(class = 'span6 offset1')
+					include account
+				div(class = 'span4')
+					div(class='row-fluid')
+						div(class='span10 offset1')
+							if(user.image == null || user.image == '') 
+								img(src='http://1.bp.blogspot.com/_D_kMnDTdGMo/TJLQ74qF1mI/AAAAAAAAAKc/uh3wAmIJRnQ/s1600/rubberchickenlove.jpg', class='img-polaroid')
+							else
+								img(src=user.image, class='img-polaroid')
+					div(class='row-fluid')
+						div(class='span6 offset3')
+							div(class='row-fluid')
+								div(class='span12')
+									button(id='btn-imageadd', class='btn btn-block btn-large btn-success') Add Profile Image
 			include modals/alert
 			include modals/confirm
 		
-		script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js")
-		script(type='text/javascript')
-			filepicker.setKey('A9WYrW1zTNe9YvWdlRiAlz');
 
+	script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js")
+	script(type='text/javascript')
+		filepicker.setKey('A9WYrW1zTNe9YvWdlRiAlz');
 	script(src='/vendor/jquery.min.js')
 	script(src='/vendor/jquery.form.js')
 	script(src='/vendor/bootstrap-modal.js')

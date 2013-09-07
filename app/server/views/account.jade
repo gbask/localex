@@ -5,7 +5,7 @@
 input(type='hidden', value= user._id)#userId
 
 #account-form-container
-	form( method="post", enctype="multipart/form-data")#account-form.form-horizontal.well.span6
+	form( method="post", enctype="multipart/form-data", class='form-horizontal well', id='account-form')
 		h1
 		p#sub1.subheading Please tell us a little about yourself.
 		hr
@@ -21,8 +21,9 @@ input(type='hidden', value= user._id)#userId
 			#image-cg.control-group
 				label.control-label(for='image-tf') Image
 				.controls
-					button(type='button', class='btn btn-success')#btn-imageadd Choose Image
-				//	input#image-tf.input-xlarge(type='file', name='image')
+					//input#image-tf.input-xlarge(type='filepicker', data-fp-apikey='A9WYrW1zTNe9YvWdlRiAlz', data-fp-mimetypes='image/*', data-fp-container='modal', onchange='alert(event.fpfile.url)', name='image')
+					//button(id='btn-imageadd', class='btn btn-success') Add an Image
+					//button(type='button')#account-form-btn3.btn
 			#city-cg.control-group
 				label.control-label(for='city-tf') City
 				.controls
@@ -62,7 +63,8 @@ input(type='hidden', value= user._id)#userId
 			.form-actions
 				button(type='button')#account-form-btn1.btn
 				button(type='submit')#account-form-btn2.btn
-
+				//button(type='button')#account-form-btn3.btn
+				
 // display form errors in a custom modal window //
 
 include modals/form-errors
