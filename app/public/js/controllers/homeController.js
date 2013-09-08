@@ -21,18 +21,17 @@ function HomeController()
 	{
 		var that = this;
 		filepicker.pick(function(InkBlob){
-			console.log(InkBlob.url);
-		$.ajax({
-			url: '/home',
-			type: 'POST',
-			data: {new_pic: true, image: InkBlob.url, user:$('#user-tf').val()},
-			success: function(data){	
-				that.UpdateSuccess('Added a Picture!');
-			},
-			error: function(jqXHR){
-				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
-			}
-		}); 
+			$.ajax({
+				url: '/home',
+				type: 'POST',
+				data: {new_pic: true, image: InkBlob.url, user:$('#user-tf').val()},
+				success: function(data){	
+					that.UpdateSuccess('Added a Picture!');
+				},
+				error: function(jqXHR){
+					console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+				}
+			}); 
 		});
 	}
 
@@ -84,7 +83,8 @@ function HomeController()
 		$('.modal-alert .modal-header h3').text('Success!');
 		$('.modal-alert .modal-body p').html(msg);
 		$('.modal-alert').modal('show');
-		$('.modal-alert button').off('click');
+		$('.modal-alert button').click(function(){window.location.href='/home';})
+		setTimeout(function(){window.location.href = '/home';}, 3000);
 	}
 }
 

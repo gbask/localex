@@ -70,7 +70,21 @@ module.exports = function(app) {
 // logged-in user homepage //
 	
 	app.get('/home', function(req, res) {
-	    if (req.session.user === null){
+		if (req.param('new_profile') == 'true') {
+			AM.manualLogin(req.param('user'), req.param('pass'), function(e, o) {
+				if(!o) {
+					console.log('failing');
+					res.send(e, 400);
+				} else {
+					console.log('made it success');
+					req.session.user = o;
+					res.redirect('/login');
+					//res.send(o, 200);
+					console.log(req.session.user);
+					
+				}
+			});
+	    } else if (req.session.user === null){
 	// if user is not logged-in redirect back to login page //
 	        res.redirect('/');
 	    }   else{
@@ -83,43 +97,6 @@ module.exports = function(app) {
 	});
 	
 	app.post('/home', function(req, res){
-		console.log(req.param('user'));
-		console.log(req.param('picURL'));
-		console.log(req.param('image'));
-/*		if(req.param('picURL') != undefined && req.param('user') != undefined) {
-			console.log('valid data: ' + req.param('picURL'));
-			AM.updateAccount({
-				user 		: req.param('user'),
-				image		: req.param('picURL')
-			}, function(e, o){
-				if (e){
-					res.send('error-updating-account', 400);
-				}	else{
-					req.session.user = o;
-			// update the user's login cookies if they exists //
-					if (req.cookies.user != undefined && req.cookies.pass != undefined){
-						res.cookie('user', o.user, { maxAge: 900000 });
-						res.cookie('pass', o.pass, { maxAge: 900000 });	
-					}
-					res.send('ok', 200);
-				}
-			});
-		} */
-		/*
-		if(!req.param('logout') ) {
-			if (req.files.image != null) {
-				var tmp_path = req.files.image.path;
-				var target_path = './app/public/img/users/' + req.files.image.name;
-				var picture_path = './img/users/' + req.files.image.name;
-				fs.rename(tmp_path, target_path, function(err) {
-					if(err) throw err;
-					fs.unlink(tmp_path, function() {
-						if(err) throw err;
-					});
-				});
-			}
-		}
-		*/
 		if(req.param('new_pic') === 'true') {
 			AM.updateImage({
 				user 		: req.param('user'),
