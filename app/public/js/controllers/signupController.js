@@ -8,6 +8,7 @@ function SignupController()
 // redirect to homepage on new account creation, add short delay so user can read alert window //
 	$('.modal-alert #ok').click(function(){ 
 		that.nextPage();
+		setTimeout(function(){window.location.href = '/home';}, 400);
 	});
 	
 	this.nextPage = function()
